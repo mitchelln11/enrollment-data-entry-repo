@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSAEnrollmentApp", "HSAEnrollmentApp\HSAEnrollmentApp.csproj", "{79D24137-4FCC-46F3-B09F-6735BD9D1DBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSAenrollmentTests", "HSAenrollmentTests\HSAenrollmentTests.csproj", "{ED8A2DC2-6810-4A08-A411-FD1789887820}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79D24137-4FCC-46F3-B09F-6735BD9D1DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D24137-4FCC-46F3-B09F-6735BD9D1DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D24137-4FCC-46F3-B09F-6735BD9D1DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D24137-4FCC-46F3-B09F-6735BD9D1DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8A2DC2-6810-4A08-A411-FD1789887820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8A2DC2-6810-4A08-A411-FD1789887820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8A2DC2-6810-4A08-A411-FD1789887820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8A2DC2-6810-4A08-A411-FD1789887820}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCE82494-7C24-47E3-982F-0FB9C0E19984}
+	EndGlobalSection
+EndGlobal
