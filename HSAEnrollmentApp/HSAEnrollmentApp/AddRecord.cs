@@ -1,33 +1,35 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace HSAEnrollmentApp
 {
     class AddRecord
     {
-        protected string fName;
-        protected string lName;
-        protected string dob;
-        protected string plan;
-        protected string effectiveDate;
-        protected string filepath = "../../files/hsa-enrolled.csv";
+        //protected string fName;
+        //protected string lName;
+        //protected string dob;
+        //protected string plan;
+        //protected string effectiveDate;
+        //protected string filepath = "../../files/hsa-enrolled.csv";
 
-        // Validators -------DO NOT ADD LEADING AND ENDING /, IT WILL NOT WORK IF YOU DO-------------
-        protected string regexBirthday = @"\b[0-1][1-9]((\/)?|(\-)?)[0-3][\d]((\/)?|(\-)?)[\d]{4}\b";
+        //// Validators -------DO NOT ADD LEADING AND ENDING /, IT WILL NOT WORK IF YOU DO-------------
+        //protected string regexBirthday = @"\b[0-1][1-9]((\/)?|(\-)?)[0-3][\d]((\/)?|(\-)?)[\d]{4}\b";
+        CsvData enrolled = new CsvData();
 
         public string AddFirstName()
         {
             Console.WriteLine("Please Type in the client's first name. Then hit enter after.");
-            fName = Console.ReadLine();
-            return fName;
+            enrolled.FirstName = Console.ReadLine();
+            return enrolled.FirstName;
         }
 
         public string AddLastName()
         {
             Console.WriteLine("Please Type in the client's last name. Then hit enter after.");
-            lName = Console.ReadLine();
-            return lName;
+            enrolled.LastName = Console.ReadLine();
+            return enrolled.LastName;
         }
 
         public bool CalculateAge(string dob)
@@ -72,13 +74,13 @@ namespace HSAEnrollmentApp
         public string AddDob()
         {
             Console.WriteLine("\r\nPlease Type in the client's Date of Birth.\r\nFormat must be 01/02/2020. For single digits, please use a leading 0.\r\nThen hit enter after.");
-            dob = Console.ReadLine();
+            enrolled.DateOfBirth = Console.ReadLine();
+            string dob = enrolled.DateOfBirth;
 
-            Regex regex = new Regex(regexBirthday);
+            Regex regex = new Regex(enrolled.RegexBirthday);
             Match match = regex.Match(dob);
             if ((match.Success) && (CalculateAge(dob) == true))
             {
-                Console.WriteLine(match.Value);
                 return dob;
             }
             else
@@ -93,15 +95,15 @@ namespace HSAEnrollmentApp
         public string AddPlanType()
         {
             Console.WriteLine("\r\nPlease Type in the client's Plan.\r\nYour options are HSA, HRA, and FSA.\r\nThen hit enter after.");
-            plan = Console.ReadLine();
-            return plan;
+            enrolled.PlanType = Console.ReadLine().ToUpper();
+            return enrolled.PlanType;
         }
 
         public DateTime AddEffectiveDate()
         {
             var currentDay = DateTime.Now;
-            effectiveDate = currentDay.ToString("MM/dd/yyyy");
-            return Convert.ToDateTime(effectiveDate);
+            enrolled.EffectiveDate = currentDay.ToString("MM/dd/yyyy");
+            return Convert.ToDateTime(enrolled.EffectiveDate);
         }
 
         public void AddNewRecord(string fName, string lName, string dob, string plan, string effectiveDate, string filepath)
@@ -127,7 +129,7 @@ namespace HSAEnrollmentApp
             AddDob();
             AddPlanType();
             AddEffectiveDate();
-            AddNewRecord(fName, lName, dob, plan, effectiveDate, filepath);
+            AddNewRecord(enrolled.FirstName, enrolled.LastName, enrolled.DateOfBirth, enrolled.PlanType, enrolled.EffectiveDate, enrolled.FilePath);
         }
     }
 }
