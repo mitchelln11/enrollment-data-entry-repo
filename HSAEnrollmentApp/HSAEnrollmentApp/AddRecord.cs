@@ -13,8 +13,8 @@ namespace HSAEnrollmentApp
         protected string effectiveDate;
         protected string filepath = "../../files/hsa-enrolled.csv";
 
-        // Validators
-        protected string regexBirthday = @"^[0-1][1-9]((\/)?|(\-)?)[0-3][\d]((\/)?|(\-)?)[\d]{4}$";
+        // Validators -------DO NOT ADD LEADING AND ENDING /, IT WILL NOT WORK IF YOU DO-------------
+        protected string regexBirthday = @"\b[0-1][1-9]((\/)?|(\-)?)[0-3][\d]((\/)?|(\-)?)[\d]{4}\b";
 
         public string AddFirstName()
         {
@@ -30,6 +30,45 @@ namespace HSAEnrollmentApp
             return lName;
         }
 
+        public bool CalculateAge(string dob)
+        {
+            int currentYear = DateTime.Now.Year;
+            int currentMonth = DateTime.Now.Month;
+            int currentDay = DateTime.Now.Day;
+            int minimumAge = 18;
+
+            string[] clientBirthday = dob.Split('/');
+            if (currentYear - Convert.ToInt32(clientBirthday[2]) == minimumAge)
+            {
+                if (Convert.ToInt32(clientBirthday[0]) == currentMonth )
+                {
+                    if (Convert.ToInt32(clientBirthday[1]) <= currentDay)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, this person must be at least {minimumAge} years of age", 0);
+                    }
+                }
+                else if (Convert.ToInt32(clientBirthday[0]) < currentMonth)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, this person must be at least {minimumAge} years of age", 0);
+                }
+            }
+            else if (currentYear - Convert.ToInt32(clientBirthday[2]) > minimumAge)
+            {
+                return true;
+            }
+            Console.WriteLine("Sorry, this person must be at least " + minimumAge + " years of age");
+            Console.ReadLine();
+            return false;
+        }
+
         public string AddDob()
         {
             Console.WriteLine("\r\nPlease Type in the client's Date of Birth.\r\nFormat must be 01/02/2020. For single digits, please use a leading 0.\r\nThen hit enter after.");
@@ -37,7 +76,7 @@ namespace HSAEnrollmentApp
 
             Regex regex = new Regex(regexBirthday);
             Match match = regex.Match(dob);
-            if (match.Success)
+            if ((match.Success) && (CalculateAge(dob) == true))
             {
                 Console.WriteLine(match.Value);
                 return dob;
