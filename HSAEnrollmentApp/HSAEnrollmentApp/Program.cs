@@ -13,6 +13,9 @@ namespace HSAEnrollmentApp
         {
             ReadFile readFile = new ReadFile();
             readFile.ReadCsvFile();
+
+            AddRecord record = new AddRecord();
+            record.RunAllRecordOptions();
         }
     }
 }

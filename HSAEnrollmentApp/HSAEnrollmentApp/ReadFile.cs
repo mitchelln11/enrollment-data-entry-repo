@@ -26,8 +26,9 @@ namespace HSAEnrollmentApp
                 Console.WriteLine(client.FirstName + "|" + client.LastName + "|" + client.DoB + "|" + client.PlanType + "|" + client.EffectiveDate);
             }
 
-            Console.WriteLine("Press any key to exit");
+            Console.WriteLine("Press any key to continue");
             Console.ReadLine();
         }
+
     }
 }
