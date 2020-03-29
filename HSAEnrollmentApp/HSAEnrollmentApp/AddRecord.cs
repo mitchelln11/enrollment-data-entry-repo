@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace HSAEnrollmentApp
 {
     class AddRecord
     {
-        public string fName;
+        protected string fName;
         protected string lName;
-        protected DateTime dob;
+        protected string dob;
         protected string plan;
         protected string effectiveDate;
         protected string filepath = "../../files/hsa-enrolled.csv";
+
+        // Validators
+        protected string regexBirthday = @"^[0-1][1-9]((\/)?|(\-)?)[0-3][\d]((\/)?|(\-)?)[\d]{4}$";
 
         public string AddFirstName()
         {
@@ -31,20 +30,25 @@ namespace HSAEnrollmentApp
             return lName;
         }
 
-        public DateTime AddDob()
+        public string AddDob()
         {
             Console.WriteLine("\r\nPlease Type in the client's Date of Birth.\r\nFormat must be 01/02/2020. For single digits, please use a leading 0.\r\nThen hit enter after.");
+            dob = Console.ReadLine();
 
-            if (DateTime.TryParse(Console.ReadLine(), out dob))
+            Regex regex = new Regex(regexBirthday);
+            Match match = regex.Match(dob);
+            if (match.Success)
             {
+                Console.WriteLine(match.Value);
                 return dob;
             }
             else
             {
                 Console.WriteLine("I'm sorry, the format was incorrect. Please try again.");
+                Console.ReadLine();
+                AddDob();
             }
-            Console.ReadLine();
-            return dob;
+            return null;
         }
 
         public string AddPlanType()
@@ -61,7 +65,7 @@ namespace HSAEnrollmentApp
             return Convert.ToDateTime(effectiveDate);
         }
 
-        public void AddNewRecord(string fName, string lName, DateTime dob, string plan, string effectiveDate, string filepath)
+        public void AddNewRecord(string fName, string lName, string dob, string plan, string effectiveDate, string filepath)
         {
             try
             {
